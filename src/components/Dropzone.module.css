@@ -1,0 +1,47 @@
+@import '../styles/_variables.css';
+
+:root {
+  --border-color: var(--brand-grey-light);
+}
+
+:global(.dark) {
+  --border-color: var(--brand-grey);
+}
+
+.dropzone {
+  border: 0.1rem dashed var(--border-color);
+  border-radius: calc(var(--border-radius) * 2);
+  padding: calc(var(--spacer) * 2) var(--spacer);
+  transition: 0.2s ease-out;
+  cursor: pointer;
+  text-align: center;
+  opacity: 0.75;
+}
+
+.dropzone:hover,
+.dropzone:focus,
+.dropzone:active {
+  outline: 0;
+}
+
+.dragover {
+  composes: dropzone;
+  border-color: var(--brand-cyan);
+}
+
+.disabled {
+  composes: dropzone;
+  border-color: var(--brand-grey-light);
+  pointer-events: none;
+}
+
+.error {
+  font-size: var(--font-size-small);
+  color: red;
+}
+
+.dropzone p {
+  text-align: center;
+  margin-bottom: 0;
+  color: var(--brand-grey);
+}

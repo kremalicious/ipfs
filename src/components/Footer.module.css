@@ -1,0 +1,15 @@
+@import '../styles/_variables.css';
+
+.footer {
+  width: 100%;
+  font-size: var(--font-size-mini);
+  padding: var(--spacer) 0;
+  padding-bottom: 0;
+  align-self: flex-end;
+  margin-top: var(--spacer);
+}
+
+.footer,
+.footer a {
+  color: var(--color-text);
+}

@@ -1,0 +1,132 @@
+@import '_variables.css';
+@import url('https://use.typekit.net/msu4qap.css');
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: var(--font-size-root);
+}
+
+body {
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-base);
+  line-height: var(--line-height);
+  text-rendering: optimizeLegibility;
+  letter-spacing: -0.01em;
+  font-feature-settings: 'liga', 'kern';
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  transition: background 0.4s var(--easing);
+  background: var(--body-background-color);
+
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+a {
+  text-decoration: none;
+  color: var(--brand-cyan);
+  transition: 0.2s ease-out var(--easing);
+}
+
+p {
+  margin: 0;
+  margin-bottom: var(--spacer);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: var(--color-headings);
+  font-family: var(--font-family-headings);
+  line-height: var(--line-height-headings);
+  font-weight: var(--font-weight-headings);
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+}
+
+h5 {
+  font-size: var(--font-size-h5);
+}
+
+figure,
+img,
+svg,
+video,
+audio,
+embed,
+canvas,
+picture {
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+ul {
+  margin-top: 0;
+  margin-bottom: calc(var(--spacer) / var(--line-height));
+  padding-left: 0;
+  list-style: none;
+  padding-left: calc(var(--spacer) / var(--line-height));
+}
+
+ul li {
+  position: relative;
+  display: block;
+  margin-bottom: 0;
+}
+
+ul li + li {
+  margin-top: calc(var(--spacer) / 4);
+}
+
+ul li:before {
+  content: ' \2015';
+  top: -1px;
+  position: absolute;
+  left: -1rem;
+  color: var(--brand-grey);
+  user-select: none;
+}
+
+::-moz-selection {
+  background: var(--selection-background-color);
+  color: #fff;
+}
+
+::selection {
+  background: var(--selection-background-color);
+  color: #fff;
+}

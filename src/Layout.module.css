@@ -1,0 +1,15 @@
+@import './styles/_variables.css';
+
+.app {
+  padding: var(--spacer);
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  min-height: 100vh;
+  margin: auto;
+  max-width: var(--screen-sm);
+}
+
+.main {
+  width: 100%;
+}
