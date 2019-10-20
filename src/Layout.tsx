@@ -26,14 +26,12 @@ export default function Layout({
           url,
           title,
           description,
-          images: [{ url: `${url}/share.png` }],
           // eslint-disable-next-line @typescript-eslint/camelcase
           site_name: title
         }}
         twitter={{
           handle: '@kremalicious',
-          site: '@kremalicious',
-          cardType: 'summary_large_image'
+          site: '@kremalicious'
         }}
       />
 

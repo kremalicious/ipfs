@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ipfsNodeUri, ipfsGateway } from '../../site.config'
 import Dropzone from './Dropzone'
 import styles from './Add.module.css'
-import Spinner from './Spinner'
+import Loader from './Loader'
 import useIpfsApi, { IpfsConfig } from '../hooks/use-ipfs-api'
 
 export function formatBytes(a: number, b: number) {
@@ -79,7 +79,7 @@ export default function Add() {
   return (
     <div className={styles.add}>
       {loading ? (
-        <Spinner message={message} />
+        <Loader message={message} />
       ) : fileHash ? (
         <a
           target="_blank"

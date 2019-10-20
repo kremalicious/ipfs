@@ -2,8 +2,8 @@
 
 /* default: red square */
 .status {
-  width: var(--font-size-mini);
-  height: var(--font-size-mini);
+  width: 0.5rem;
+  height: 0.5rem;
   display: inline-block;
   background: #ff4136;
   margin-right: calc(var(--spacer) / 8);

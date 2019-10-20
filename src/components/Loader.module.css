@@ -1,0 +1,48 @@
+@import '../styles/_variables.css';
+
+.loader {
+  position: relative;
+  text-align: center;
+  margin-top: calc(var(--spacer) * 4);
+  margin-bottom: calc(var(--spacer) / 2);
+  line-height: 1.3;
+}
+
+.loader:before,
+.loader:after {
+  --size: 1.75rem;
+
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-top: calc(var(--size) * -1);
+  margin-left: calc(var(--size) / -2);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background-color: var(--brand-cyan);
+  opacity: 0.6;
+
+  animation: loader 1.5s infinite var(--easing);
+}
+
+.loader:after {
+  animation-delay: -0.75s;
+}
+
+.loaderMessage {
+  color: var(--brand-grey);
+  padding-top: calc(var(--spacer) / 4);
+}
+
+@keyframes loader {
+  0%,
+  100% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+}

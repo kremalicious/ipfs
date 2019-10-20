@@ -1,7 +1,7 @@
 @import '../styles/_variables.css';
 
 :root {
-  --border-color: var(--brand-grey-light);
+  --border-color: var(--brand-grey-dimmed);
 }
 
 :global(.dark) {
@@ -9,18 +9,19 @@
 }
 
 .dropzone {
-  border: 0.1rem dashed var(--border-color);
-  border-radius: calc(var(--border-radius) * 2);
+  border: 0.4rem dashed var(--border-color);
+  border-radius: var(--border-radius);
   padding: calc(var(--spacer) * 2) var(--spacer);
   transition: 0.2s ease-out;
   cursor: pointer;
   text-align: center;
-  opacity: 0.75;
+  color: var(--brand-grey-light);
 }
 
 .dropzone:hover,
 .dropzone:focus,
 .dropzone:active {
+  border-color: var(--brand-cyan);
   outline: 0;
 }
 
@@ -31,7 +32,7 @@
 
 .disabled {
   composes: dropzone;
-  border-color: var(--brand-grey-light);
+  opacity: 0.3;
   pointer-events: none;
 }
 

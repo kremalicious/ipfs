@@ -2,7 +2,7 @@
 
 .header {
   margin-top: 10vh;
-  margin-bottom: calc(var(--spacer) * 2);
+  margin-bottom: calc(var(--spacer) * 3);
   text-align: center;
 }
 

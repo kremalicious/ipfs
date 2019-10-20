@@ -38,11 +38,11 @@ export default function Dropzone({
       {isDragActive && !isDragReject ? (
         `Drop it like it's hot!`
       ) : multiple ? (
-        `Drag 'n' drop some files here, or click to select files`
+        `Drag 'n' drop some files here, or click to select files.`
       ) : error ? (
         <div className={styles.error}>{error}</div>
       ) : (
-        `Drag 'n' drop a file here, or click to select a file`
+        `Drag 'n' drop a file here, or click to select a file.`
       )}
     </div>
   )

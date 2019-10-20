@@ -39,7 +39,7 @@ body {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: underline var(--link-underline-color);
   color: var(--brand-cyan);
   transition: 0.2s ease-out var(--easing);
 }
