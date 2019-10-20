@@ -1,7 +1,4 @@
 import React from 'react'
-
-import '../styles/global.css'
-
 import Add from '../components/Add'
 import { title, description } from '../../site.config'
 import styles from './index.module.css'

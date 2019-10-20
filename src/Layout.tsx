@@ -1,9 +1,8 @@
 import React, { ReactNode } from 'react'
-import Head from 'next/head'
 import { NextSeo } from 'next-seo'
 import Footer from './components/Footer'
-import styles from './Layout.module.css'
 import { title, description, url } from '../site.config'
+import styles from './Layout.module.css'
 
 export default function Layout({
   children,
@@ -14,10 +13,6 @@ export default function Layout({
 }) {
   return (
     <div className={styles.app}>
-      <Head>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <NextSeo
         title={pageTitle}
         description={description}

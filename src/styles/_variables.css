@@ -44,6 +44,10 @@
 
   --easing: cubic-bezier(0.75, 0, 0.08, 1);
 
+  --switch-knob-size: 8px;
+  --switch-knob-space: 1px;
+  --loaderSize: 1.75rem;
+
   --body-background-color: var(--brand-light);
   --color-text: var(--brand-grey);
   --color-headings: var(--brand-main);

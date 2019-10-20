@@ -1,20 +1,10 @@
 import { useEffect, useState } from 'react'
 import ipfsClient from 'ipfs-http-client'
+import { parseHTML } from '../utils'
+import { IpfsConfig } from '../@types/ipfs'
 
 let ipfs: any = null
 let ipfsVersion = ''
-
-export interface IpfsConfig {
-  protocol: string
-  host: string
-  port: string
-}
-
-function parseHTML(str: string) {
-  const tmp = document.implementation.createHTMLDocument()
-  tmp.body.innerHTML = str
-  return tmp.body.children
-}
 
 export default function useIpfsApi(config: IpfsConfig) {
   const [isIpfsReady, setIpfsReady] = useState(Boolean(ipfs))

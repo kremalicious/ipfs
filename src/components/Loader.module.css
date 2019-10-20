@@ -1,5 +1,3 @@
-@import '../styles/_variables.css';
-
 .loader {
   position: relative;
   text-align: center;
@@ -10,17 +8,15 @@
 
 .loader:before,
 .loader:after {
-  --size: 1.75rem;
-
   content: '';
   box-sizing: border-box;
   position: absolute;
   top: 0;
   left: 50%;
-  margin-top: calc(var(--size) * -1);
-  margin-left: calc(var(--size) / -2);
-  width: var(--size);
-  height: var(--size);
+  margin-top: calc(var(--loaderSize) * -1);
+  margin-left: calc(var(--loaderSize) / -2);
+  width: var(--loaderSize);
+  height: var(--loaderSize);
   border-radius: 50%;
   background-color: var(--brand-cyan);
   opacity: 0.6;
