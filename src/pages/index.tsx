@@ -1,10 +1,11 @@
 import React from 'react'
-import Add from '../components/Add'
+import dynamic from 'next/dynamic'
 import { title, description } from '../../site.config'
+import Layout from '../Layout'
 import styles from './index.module.css'
 
-import Layout from '../Layout'
-import Info from '../components/Info'
+const Add = dynamic(() => import('../components/Add'))
+const Info = dynamic(() => import('../components/Info'))
 
 const Home = () => (
   <Layout>
