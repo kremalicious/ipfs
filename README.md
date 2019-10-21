@@ -5,7 +5,7 @@
 
 [![Build Status](https://flat.badgen.net/travis/kremalicious/ipfs?icon=travis)](https://travis-ci.com/kremalicious/ipfs)
 
-This repo holds a simple React app built with [Next.js](https://nextjs.org) serving as the frontpage of [ipfs.kretschmann.io](https://ipfs.kretschmann.io) from where you can add files to IPFS via drag and drop.
+This repo holds a React app built with [Next.js](https://nextjs.org) serving as the frontpage of [ipfs.kretschmann.io](https://ipfs.kretschmann.io) from where you can add files to IPFS via drag and drop.
 
 ---
 
@@ -26,7 +26,7 @@ Will start a live-reloading local server, reachable under [localhost:3000](http:
 
 ## Production
 
-To create a production build, run from the root of the project:
+To create a production build:
 
 ```bash
 npm run build
