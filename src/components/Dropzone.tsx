@@ -2,13 +2,17 @@ import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import styles from './Dropzone.module.css'
 
+export interface FileDropzone extends File {
+  path: string
+}
+
 export default function Dropzone({
   handleOnDrop,
   disabled,
   multiple,
   error
 }: {
-  handleOnDrop(files: File[]): void
+  handleOnDrop(files: FileDropzone[]): void
   disabled?: boolean
   multiple?: boolean
   error?: string
@@ -37,12 +41,12 @@ export default function Dropzone({
       <input {...getInputProps({ multiple })} />
       {isDragActive && !isDragReject ? (
         `Drop it like it's hot!`
-      ) : multiple ? (
-        `Drag 'n' drop some files here, or click to select files.`
+      ) : multiple === false ? (
+        `Drag 'n' drop a file here, or click to select a file.`
       ) : error ? (
         <div className={styles.error}>{error}</div>
       ) : (
-        `Drag 'n' drop a file here, or click to select a file.`
+        `Drag 'n' drop some files here, or click to select files.`
       )}
     </div>
   )

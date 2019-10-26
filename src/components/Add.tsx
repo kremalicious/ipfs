@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { ipfsNodeUri, ipfsGateway } from '../../site.config'
-import Dropzone from './Dropzone'
+import Dropzone, { FileDropzone } from './Dropzone'
 import styles from './Add.module.css'
 import Loader from './Loader'
 import useIpfsApi from '../hooks/use-ipfs-api'
 import { IpfsConfig } from '../@types/ipfs'
-import { formatBytes, addToIpfs } from '../utils'
+import { addToIpfs, FileIpfs } from '../ipfs'
 
 const { hostname, port, protocol } = new URL(ipfsNodeUri)
 
@@ -17,33 +17,23 @@ const ipfsConfig: IpfsConfig = {
 
 export default function Add() {
   const { ipfs, isIpfsReady, ipfsError } = useIpfsApi(ipfsConfig)
-  const [fileHash, setFileHash] = useState()
+  const [files, setFiles] = useState()
   const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState()
+  const [message] = useState()
   const [error, setError] = useState()
-  const [fileSize, setFileSize] = useState()
-  const [fileSizeReceived, setFileSizeReceived] = useState('')
 
-  useEffect(() => {
-    setMessage(
-      `Adding to IPFS<br />
-       <small>${fileSizeReceived || 0}/${fileSize}</small><br />`
-    )
-  }, [fileSize, fileSizeReceived])
-
-  async function handleOnDrop(acceptedFiles: File[]) {
-    if (!acceptedFiles[0]) return
+  async function handleOnDrop(acceptedFiles: FileDropzone[]) {
+    if (!acceptedFiles) return
 
     setLoading(true)
     setError(null)
 
-    const totalSize = formatBytes(acceptedFiles[0].size, 0)
-    setFileSize(totalSize)
-
     try {
-      const cid = await addToIpfs(acceptedFiles, setFileSizeReceived, ipfs)
-      if (!cid) return
-      setFileHash(cid)
+      const directoryCid = await addToIpfs(ipfs, acceptedFiles)
+      if (!directoryCid) return
+
+      const fileList = await ipfs.ls(directoryCid)
+      setFiles(fileList)
       setLoading(false)
     } catch (error) {
       setError(`Adding to IPFS failed: ${error.message}`)
@@ -55,17 +45,22 @@ export default function Add() {
     <div className={styles.add}>
       {loading ? (
         <Loader message={message} />
-      ) : fileHash ? (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href={`${ipfsGateway}/ipfs/${fileHash}`}
-        >
-          ipfs://{fileHash}
-        </a>
+      ) : files ? (
+        <ul style={{ textAlign: 'left' }}>
+          {files.map((file: FileIpfs) => (
+            <li key={file.path}>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={`${ipfsGateway}/ipfs/${file.path}`}
+              >
+                ipfs://{file.path}
+              </a>
+            </li>
+          ))}
+        </ul>
       ) : (
         <Dropzone
-          multiple={false}
           handleOnDrop={handleOnDrop}
           disabled={!isIpfsReady}
           error={error || ipfsError}
