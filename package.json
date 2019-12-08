@@ -6,8 +6,11 @@
     "start": "next dev",
     "build": "next build",
     "serve": "next start",
-    "test": "eslint --ignore-path .gitignore '**/*.{js,jsx,ts,tsx}'",
-    "format": "prettier --ignore-path .gitignore '**/*.{css,yml,js,jsx,ts,tsx,json}' --write"
+    "test": "npm run lint && NODE_ENV=test jest",
+    "test:watch": "npm run lint && NODE_ENV=test jest --watch",
+    "lint": "eslint --ignore-path .gitignore --ext .js .",
+    "format": "prettier --ignore-path .gitignore '**/*.{css,yml,js,jsx,ts,tsx,json}' --write",
+    "analyze": "ANALYZE=true next build"
   },
   "author": "Matthias Kretschmann <m@kretschmann.io>",
   "license": "MIT",
@@ -24,6 +27,10 @@
     "use-dark-mode": "^2.3.1"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^9.1.4",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@types/jest": "^24.0.23",
     "@types/next-seo": "^1.10.0",
     "@types/node": "^12.12.14",
     "@types/react": "^16.9.15",
@@ -35,8 +42,10 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.17.0",
+    "jest": "^24.9.0",
     "postcss-preset-env": "^6.7.0",
     "prettier": "^1.19.1",
+    "ts-jest": "^24.2.0",
     "typescript": "^3.7.3"
   },
   "engines": {

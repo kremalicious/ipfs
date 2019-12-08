@@ -22,7 +22,7 @@ export default function Add() {
   const [message] = useState()
   const [error, setError] = useState()
 
-  async function handleOnDrop(acceptedFiles: FileDropzone[]) {
+  async function handleOnDrop(acceptedFiles: FileDropzone[]): Promise<any> {
     if (!acceptedFiles) return
 
     setLoading(true)
