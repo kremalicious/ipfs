@@ -17,6 +17,7 @@ export function streamFiles(ipfs: any, ipfsFiles: FileIpfsAdd[]) {
       wrapWithDirectory: true
       // progress: (length: number) => setFileSizeReceived(formatBytes(length, 0))
     })
+    console.log(stream)
 
     stream.on('data', (data: FileIpfs) => {
       console.log(`Added ${data.path} hash: ${data.hash}`)

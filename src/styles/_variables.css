@@ -55,7 +55,7 @@
   --link-underline-color: var(--brand-grey-dimmed);
 }
 
-:global(.dark) {
+.dark {
   --body-background-color: #1d2224;
   --color-text: var(--brand-grey-light);
   --color-headings: var(--brand-main-light);

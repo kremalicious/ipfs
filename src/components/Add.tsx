@@ -17,16 +17,16 @@ const ipfsConfig: IpfsConfig = {
 
 export default function Add() {
   const { ipfs, isIpfsReady, ipfsError } = useIpfsApi(ipfsConfig)
-  const [files, setFiles] = useState()
+  const [files, setFiles] = useState([])
   const [loading, setLoading] = useState(false)
   const [message] = useState()
-  const [error, setError] = useState()
+  const [error, setError] = useState('')
 
   async function handleOnDrop(acceptedFiles: FileDropzone[]): Promise<any> {
     if (!acceptedFiles) return
 
     setLoading(true)
-    setError(null)
+    setError('')
 
     try {
       const directoryCid = await addToIpfs(ipfs, acceptedFiles)
@@ -45,7 +45,7 @@ export default function Add() {
     <div className={styles.add}>
       {loading ? (
         <Loader message={message} />
-      ) : files ? (
+      ) : files.length ? (
         <ul style={{ textAlign: 'left' }}>
           {files.map((file: FileIpfs) => (
             <li key={file.path}>

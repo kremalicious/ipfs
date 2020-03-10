@@ -21,6 +21,7 @@ const ThemeToggleInput = ({
   toggleDark(): void
 }) => (
   <input
+    className={styles.input}
     onChange={toggleDark}
     type="checkbox"
     name="toggle"

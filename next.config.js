@@ -1,5 +1,3 @@
-const withCSS = require('@zeit/next-css')
-
 // eslint-disable-next-line no-unused-vars
 const withSvgr = (nextConfig = {}, nextComposePlugins = {}) => {
   return Object.assign({}, nextConfig, {
@@ -25,11 +23,4 @@ const withSvgr = (nextConfig = {}, nextComposePlugins = {}) => {
   })
 }
 
-module.exports = withSvgr(
-  withCSS({
-    cssModules: true,
-    cssLoaderOptions: {
-      localIdentName: '[local]___[hash:base64:5]'
-    }
-  })
-)
+module.exports = withSvgr()
