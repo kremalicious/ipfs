@@ -13,7 +13,6 @@ export default function useIpfsApi(config: IpfsConfig) {
   useEffect(() => {
     async function initIpfs() {
       if (ipfs !== null) return
-      // eslint-disable-next-line
       ipfs = await ipfsClient(config)
 
       try {
