@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import styles from './Loader.module.css'
 
-const Loader = ({ message }: { message?: string }) => (
+const Loader = ({ message }: { message?: string }): ReactElement => (
   <div className={styles.loader}>
     {message && (
       <div

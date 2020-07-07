@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, ReactElement } from 'react'
 import { ipfsNodeUri, ipfsGateway } from '../../site.config'
 import Dropzone, { FileDropzone } from './Dropzone'
 import styles from './Add.module.css'
@@ -15,7 +15,7 @@ const ipfsConfig: IpfsConfig = {
   port: port || '443'
 }
 
-export default function Add() {
+export default function Add(): ReactElement {
   const { ipfs, isIpfsReady, ipfsError } = useIpfsApi(ipfsConfig)
   const [files, setFiles] = useState([])
   const [loading, setLoading] = useState(false)

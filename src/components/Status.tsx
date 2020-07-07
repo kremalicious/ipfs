@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, ReactElement } from 'react'
 import { pingUrl } from '../utils'
 import { ipfsGateway, ipfsNodeUri } from '../../site.config'
 import styles from './Status.module.css'
 
-export default function Status({ type }: { type: string }) {
+export default function Status({ type }: { type: string }): ReactElement {
   const [isOnline, setIsOnline] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 

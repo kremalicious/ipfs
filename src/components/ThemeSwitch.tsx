@@ -1,4 +1,6 @@
-import React from 'react'
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */
+
+import React, { ReactElement } from 'react'
 import useDarkMode from 'use-dark-mode'
 
 import Day from '../images/day.svg'
@@ -31,7 +33,7 @@ const ThemeToggleInput = ({
   />
 )
 
-export default function ThemeSwitch() {
+export default function ThemeSwitch(): ReactElement {
   const darkMode = useDarkMode(false, {
     classNameDark: 'dark',
     classNameLight: 'light'

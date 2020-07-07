@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import Status from './Status'
 import styles from './Info.module.css'
 
-export default function Info() {
+export default function Info(): ReactElement {
   return (
     <aside className={styles.info}>
       <h2>

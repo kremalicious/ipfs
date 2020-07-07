@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import Head from 'next/head'
 import { typekitId } from '../../site.config'
 
@@ -13,7 +13,7 @@ const typekitScript = `
   })(document);
 `
 
-export default function Typekit() {
+export default function Typekit(): ReactElement | null {
   return typekitId ? (
     <Head key="typekit">
       <link rel="dns-prefetch" href="https://use.typekit.net/" />

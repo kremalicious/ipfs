@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import ThemeSwitch from './ThemeSwitch'
 import styles from './Footer.module.css'
 
-export default function Footer() {
+export default function Footer(): ReactElement {
   const year = new Date().getFullYear()
 
   return (
