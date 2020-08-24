@@ -15,7 +15,7 @@
   "author": "Matthias Kretschmann <m@kretschmann.io>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.20.0",
     "ipfs-http-client": "^46.0.0",
     "next": "^9.5.2",
     "next-seo": "^4.7.3",
