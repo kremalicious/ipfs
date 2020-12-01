@@ -22,7 +22,7 @@
     "next-svgr": "^0.0.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-dropzone": "^11.2.0",
+    "react-dropzone": "^11.2.4",
     "use-dark-mode": "^2.3.1"
   },
   "devDependencies": {
