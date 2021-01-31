@@ -3,7 +3,7 @@
 > A public IPFS node & gateway.
 > [ipfs.kretschmann.io](https://ipfs.kretschmann.io)
 
-[![Build Status](https://flat.badgen.net/travis/kremalicious/ipfs?icon=travis)](https://travis-ci.com/kremalicious/ipfs)
+[![Build Status](https://github.com/kremalicious/ipfs/workflows/CI%2FCD%20Pipeline/badge.svg)](https://github.com/kremalicious/ipfs/actions)
 
 This repo holds a React app built with [Next.js](https://nextjs.org) serving as the frontpage of [ipfs.kretschmann.io](https://ipfs.kretschmann.io) from where you can add files to IPFS via drag and drop.
 
