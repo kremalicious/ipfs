@@ -30,6 +30,8 @@ export default function useIpfsApi(config: Options): IpfsApiValue {
 
       const options = {
         wrapWithDirectory: true,
+        cidVersion: 1,
+        hashAlg: 'sha2-256',
         progress: (length: number) => formatBytes(length, 0)
       }
 
