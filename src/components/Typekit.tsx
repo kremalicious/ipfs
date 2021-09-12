@@ -1,11 +1,10 @@
 import React, { ReactElement } from 'react'
 import Head from 'next/head'
-import { typekitId } from '../../site.config'
 
 const typekitScript = `
   (function(d) {
     var config = {
-      kitId: '${typekitId}',
+      kitId: '${process.env.NEXT_PUBLIC_TYPEKIT_ID}',
       scriptTimeout: 3000,
       async: true
     },
@@ -14,11 +13,11 @@ const typekitScript = `
 `
 
 export default function Typekit(): ReactElement | null {
-  return typekitId ? (
+  return (
     <Head key="typekit">
       <link rel="dns-prefetch" href="https://use.typekit.net/" />
       <link rel="dns-prefetch" href="https://p.typekit.net/" />
       <script dangerouslySetInnerHTML={{ __html: typekitScript }} />
     </Head>
-  ) : null
+  )
 }

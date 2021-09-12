@@ -27,3 +27,5 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+        env:
+          NEXT_PUBLIC_TYPEKIT_ID: ${{ secrets.NEXT_PUBLIC_TYPEKIT_ID }}

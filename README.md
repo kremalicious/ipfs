@@ -19,6 +19,7 @@ This repo holds a React app built with [Next.js](https://nextjs.org) serving as 
 
 ```bash
 npm i
+cp .env.sample .env
 npm start
 ```
 
