@@ -33,7 +33,7 @@
         "plugin:react-hooks/recommended",
         "plugin:@next/next/recommended"
       ],
-      "plugins": ["@typescript-eslint", "react"],
+      "plugins": ["@typescript-eslint", "react", "@next/next"],
       "rules": {
         "react/prop-types": "off",
         "@typescript-eslint/explicit-function-return-type": "off"
