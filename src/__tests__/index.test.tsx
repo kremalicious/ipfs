@@ -1,10 +1,11 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, waitFor, screen } from '@testing-library/react'
 import Home from '../pages'
 
 describe('Home', () => {
   it('renders without crashing', async () => {
-    const { container } = render(<Home />)
-    expect(container.firstChild).toBeInTheDocument()
+    render(<Home />)
+    await waitFor(() => screen.getAllByTitle('Online').length === 2)
+    expect(screen.getAllByTitle('Online').length).toBe(2)
   })
 })

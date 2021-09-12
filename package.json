@@ -6,9 +6,10 @@
     "start": "next dev",
     "build": "next build",
     "serve": "next start",
-    "test": "npm run lint && NODE_ENV=test jest",
-    "test:watch": "npm run lint && NODE_ENV=test jest --watch",
+    "test": "npm run lint && npm run type-check && NODE_ENV=test jest",
+    "test:watch": "npm run lint && npm run type-check && NODE_ENV=test jest --watch",
     "lint": "eslint --ignore-path .gitignore --ext .js --ext .tsx --ext .ts .",
+    "type-check": "tsc --noEmit",
     "format": "prettier --ignore-path .gitignore '**/*.{css,yml,js,jsx,ts,tsx,json}' --write",
     "analyze": "ANALYZE=true next build"
   },
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^11.1.2",
+    "@next/eslint-plugin-next": "^11.1.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.0",
     "@types/jest": "^27.0.1",

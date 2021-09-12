@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { create, IPFSHTTPClient, Options } from 'ipfs-http-client'
+import type { CIDVersion } from 'multiformats/cid'
 import { formatBytes } from '../utils'
 import { FileDropzone } from '../components/Dropzone'
 import { FileIpfs } from '../@types/ipfs'
@@ -30,7 +31,7 @@ export default function useIpfsApi(config: Options): IpfsApiValue {
 
       const options = {
         wrapWithDirectory: true,
-        cidVersion: 1,
+        cidVersion: 1 as CIDVersion,
         hashAlg: 'sha2-256',
         progress: (length: number) => formatBytes(length, 0)
       }
