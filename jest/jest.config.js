@@ -1,10 +1,7 @@
 module.exports = {
-  preset: 'ts-jest/presets/js-with-ts',
-  setupFilesAfterEnv: ['<rootDir>/jest/setup.ts'],
-  globals: {
-    'ts-jest': {
-      tsconfig: 'jest.tsconfig.json'
-    }
+  rootDir: '../',
+  transform: {
+    '^.+\\.[jt]sx?$': ['babel-jest', { configFile: './jest/babel.config.js' }]
   },
   moduleNameMapper: {
     '.+\\.(css|styl|less|sass|scss)$': '<rootDir>/jest/__mocks__/styleMock.js',
@@ -18,6 +15,7 @@ module.exports = {
     '<rootDir>/build',
     '<rootDir>/coverage'
   ],
+  setupFilesAfterEnv: ['<rootDir>/jest/setup.ts'],
   collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/@types/**/*'],
   collectCoverage: true,
   testEnvironment: 'jsdom'
