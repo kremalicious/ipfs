@@ -1,11 +1,11 @@
 import React from 'react'
-import { render, waitFor, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import Home from '../pages'
 
 describe('Home', () => {
   it('renders without crashing', async () => {
     render(<Home />)
-    await waitFor(() => screen.getAllByTitle('Online').length === 2)
-    expect(screen.getAllByTitle('Online').length).toBe(2)
+    await screen.findAllByTitle('Online', undefined, { timeout: 10000 })
+    expect(screen.getByText('A public IPFS Gateway')).toBeInTheDocument()
   })
 })
