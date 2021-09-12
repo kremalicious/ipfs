@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useState } from 'react'
-import { create, IPFSHTTPClient, Options } from 'ipfs-http-client'
+import { create } from 'ipfs-http-client'
+import type { IPFSHTTPClient } from 'ipfs-http-client'
 import type { CIDVersion } from 'multiformats/cid'
+import { ipfsNodeUri } from '../../site.config'
 import { formatBytes } from '../utils'
 import { FileDropzone } from '../components/Dropzone'
-import { FileIpfs } from '../@types/ipfs'
+import type { FileIpfs } from '../@types/ipfs'
 
 export interface IpfsApiValue {
   ipfs: IPFSHTTPClient | undefined
@@ -13,7 +15,15 @@ export interface IpfsApiValue {
   addFiles: (files: FileDropzone[]) => Promise<FileIpfs[] | undefined>
 }
 
-export default function useIpfsApi(config: Options): IpfsApiValue {
+const { hostname, port, protocol } = new URL(ipfsNodeUri)
+
+const ipfsConfig = {
+  protocol: protocol.replace(':', ''),
+  host: hostname,
+  port: Number(port) || 443
+}
+
+export default function useIpfsApi(): IpfsApiValue {
   const [ipfs, setIpfs] = useState<IPFSHTTPClient>()
   const [version, setVersion] = useState<string>()
   const [isIpfsReady, setIpfsReady] = useState(Boolean(ipfs))
@@ -52,7 +62,7 @@ export default function useIpfsApi(config: Options): IpfsApiValue {
 
     async function initIpfs() {
       try {
-        const ipfs = create(config)
+        const ipfs = create(ipfsConfig)
         setIpfs(ipfs)
         const version = await ipfs.version()
         setVersion(version.version)
@@ -73,7 +83,7 @@ export default function useIpfsApi(config: Options): IpfsApiValue {
         setIpfsError(undefined)
       }
     }
-  }, [config, ipfs])
+  }, [ipfs])
 
   return { ipfs, version, isIpfsReady, ipfsError, addFiles }
 }

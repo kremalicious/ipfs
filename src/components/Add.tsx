@@ -1,21 +1,13 @@
 import React, { useState, ReactElement } from 'react'
-import { ipfsNodeUri, ipfsGateway } from '../../site.config'
+import { ipfsGateway } from '../../site.config'
 import Dropzone, { FileDropzone } from './Dropzone'
 import styles from './Add.module.css'
 import Loader from './Loader'
 import useIpfsApi from '../hooks/use-ipfs-api'
 import { FileIpfs } from '../@types/ipfs'
 
-const { hostname, port, protocol } = new URL(ipfsNodeUri)
-
-const ipfsConfig = {
-  protocol: protocol.replace(':', ''),
-  host: hostname,
-  port: Number(port) || 443
-}
-
 export default function Add(): ReactElement {
-  const { ipfs, isIpfsReady, ipfsError, addFiles } = useIpfsApi(ipfsConfig)
+  const { ipfs, isIpfsReady, ipfsError, addFiles } = useIpfsApi()
   const [files, setFiles] = useState<FileIpfs[]>()
   const [loading, setLoading] = useState(false)
   const [message] = useState()
