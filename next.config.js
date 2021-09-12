@@ -1,9 +1,3 @@
-// @ts-check
-
-/**
- * @type {import('next').NextConfig}
- **/
-
 // eslint-disable-next-line no-unused-vars
 const withSvgr = (nextConfig = {}, nextComposePlugins = {}) => {
   return Object.assign({}, nextConfig, {
@@ -33,4 +27,4 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true'
 })
 
-module.exports = withBundleAnalyzer(withSvgr)
+module.exports = withSvgr(withBundleAnalyzer())
