@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactElement } from 'react'
+import React, { useState, useEffect, ReactElement, useCallback } from 'react'
 import { pingUrl } from '../utils'
 import { ipfsGateway, ipfsNodeUri } from '../../site.config'
 import styles from './Status.module.css'
@@ -7,7 +7,7 @@ export default function Status({ type }: { type: string }): ReactElement {
   const [isOnline, setIsOnline] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
-  async function ping() {
+  const ping = useCallback(async () => {
     const url =
       type === 'gateway'
         ? `${ipfsGateway}/ipfs/QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG/readme`
@@ -15,8 +15,8 @@ export default function Status({ type }: { type: string }): ReactElement {
 
     const ping = await pingUrl(url)
     setIsLoading(false)
-    isOnline !== ping && setIsOnline(ping)
-  }
+    setIsOnline(ping)
+  }, [type])
 
   useEffect(() => {
     ping()
@@ -30,7 +30,7 @@ export default function Status({ type }: { type: string }): ReactElement {
       setIsOnline(false)
       setIsLoading(false)
     }
-  }, [])
+  }, [ping])
 
   const classes = isLoading
     ? styles.loading

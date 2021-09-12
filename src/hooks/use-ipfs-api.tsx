@@ -1,53 +1,76 @@
-import { useEffect, useState } from 'react'
-import ipfsClient from 'ipfs-http-client'
-import { parseHTML } from '../utils'
-import { IpfsConfig } from '../@types/ipfs'
+import { useCallback, useEffect, useState } from 'react'
+import { create, IPFSHTTPClient, Options } from 'ipfs-http-client'
+import { formatBytes } from '../utils'
+import { FileDropzone } from '../components/Dropzone'
+import { FileIpfs } from '../@types/ipfs'
 
-let ipfs: any = null
-let ipfsVersion = ''
+export interface IpfsApiValue {
+  ipfs: IPFSHTTPClient | undefined
+  version: string | undefined
+  isIpfsReady: boolean
+  ipfsError: string | undefined
+  addFiles: (files: FileDropzone[]) => Promise<FileIpfs[] | undefined>
+}
 
-export default function useIpfsApi(config: IpfsConfig) {
+export default function useIpfsApi(config: Options): IpfsApiValue {
+  const [ipfs, setIpfs] = useState<IPFSHTTPClient>()
+  const [version, setVersion] = useState<string>()
   const [isIpfsReady, setIpfsReady] = useState(Boolean(ipfs))
-  const [ipfsError, setIpfsError] = useState('')
+  const [ipfsError, setIpfsError] = useState<string>()
+
+  const addFiles = useCallback(
+    async (files: FileDropzone[]): Promise<FileIpfs[] | undefined> => {
+      if (!ipfs || !files?.length) return
+
+      const ipfsFiles = [
+        ...files.map((file: FileDropzone) => {
+          return { path: file.path, content: file }
+        })
+      ]
+
+      const options = {
+        wrapWithDirectory: true,
+        progress: (length: number) => formatBytes(length, 0)
+      }
+
+      const results: FileIpfs[] = []
+      for await (const result of ipfs.addAll(ipfsFiles, options)) {
+        console.log(result)
+        results.push(result)
+      }
+
+      return results
+    },
+    [ipfs]
+  )
 
   useEffect(() => {
+    if (ipfs) return
+
     async function initIpfs() {
-      if (ipfs !== null) return
-      ipfs = await ipfsClient(config)
-
       try {
+        const ipfs = create(config)
+        setIpfs(ipfs)
         const version = await ipfs.version()
-        ipfsVersion = version.version
-      } catch (error) {
-        let { message } = error
-
-        if (!error.status) {
-          const htmlData = parseHTML(error)
-          message = htmlData.item(0)
-          message = message.textContent
-        }
-
-        setIpfsError(`IPFS connection error: ${message}`)
+        setVersion(version.version)
+        setIpfsReady(Boolean(ipfs && (await ipfs.id())))
+      } catch (e) {
+        setIpfsError(`IPFS connection error: ${(e as Error).message}`)
         setIpfsReady(false)
         return
       }
-      setIpfsReady(Boolean(await ipfs.id()))
     }
-
     initIpfs()
-  }, [config])
 
-  useEffect(() => {
-    // just like componentWillUnmount()
-    return function cleanup() {
+    return () => {
       if (ipfs) {
         setIpfsReady(false)
-        ipfs = null
-        ipfsVersion = ''
-        setIpfsError('')
+        setIpfs(undefined)
+        setVersion(undefined)
+        setIpfsError(undefined)
       }
     }
-  }, [])
+  }, [config, ipfs])
 
-  return { ipfs, ipfsVersion, isIpfsReady, ipfsError }
+  return { ipfs, version, isIpfsReady, ipfsError, addFiles }
 }

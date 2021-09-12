@@ -4,40 +4,37 @@ import Dropzone, { FileDropzone } from './Dropzone'
 import styles from './Add.module.css'
 import Loader from './Loader'
 import useIpfsApi from '../hooks/use-ipfs-api'
-import { IpfsConfig } from '../@types/ipfs'
-import { addToIpfs, FileIpfs } from '../ipfs'
+import { FileIpfs } from '../@types/ipfs'
 
 const { hostname, port, protocol } = new URL(ipfsNodeUri)
 
-const ipfsConfig: IpfsConfig = {
+const ipfsConfig = {
   protocol: protocol.replace(':', ''),
   host: hostname,
-  port: port || '443'
+  port: Number(port) || 443
 }
 
 export default function Add(): ReactElement {
-  const { ipfs, isIpfsReady, ipfsError } = useIpfsApi(ipfsConfig)
-  const [files, setFiles] = useState([])
+  const { ipfs, isIpfsReady, ipfsError, addFiles } = useIpfsApi(ipfsConfig)
+  const [files, setFiles] = useState<FileIpfs[]>()
   const [loading, setLoading] = useState(false)
   const [message] = useState()
-  const [error, setError] = useState('')
+  const [error, setError] = useState<string>()
 
-  async function handleOnDrop(acceptedFiles: FileDropzone[]): Promise<any> {
-    if (!acceptedFiles) return
+  async function handleOnDrop(acceptedFiles: FileDropzone[]): Promise<void> {
+    if (!acceptedFiles || !ipfs || !isIpfsReady) return
 
     setLoading(true)
-    setError('')
+    setError(undefined)
 
     try {
-      const directoryCid = await addToIpfs(ipfs, acceptedFiles)
-      if (!directoryCid) return
-
-      const fileList = await ipfs.ls(directoryCid)
-      setFiles(fileList)
+      const addedFiles = await addFiles(acceptedFiles)
+      if (!addedFiles) return
+      setFiles(addedFiles)
       setLoading(false)
     } catch (error) {
-      setError(`Adding to IPFS failed: ${error.message}`)
-      return null
+      setError(`Adding to IPFS failed: ${(error as Error).message}`)
+      return
     }
   }
 
@@ -45,14 +42,14 @@ export default function Add(): ReactElement {
     <div className={styles.add}>
       {loading ? (
         <Loader message={message} />
-      ) : files.length ? (
+      ) : files?.length ? (
         <ul style={{ textAlign: 'left' }}>
-          {files.map((file: FileIpfs) => (
+          {files?.map((file: FileIpfs) => (
             <li key={file.path}>
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                href={`${ipfsGateway}/ipfs/${file.path}`}
+                href={`${ipfsGateway}/ipfs/${file.cid.toString()}`}
               >
                 ipfs://{file.path}
               </a>
@@ -61,6 +58,7 @@ export default function Add(): ReactElement {
         </ul>
       ) : (
         <Dropzone
+          multiple
           handleOnDrop={handleOnDrop}
           disabled={!isIpfsReady}
           error={error || ipfsError}

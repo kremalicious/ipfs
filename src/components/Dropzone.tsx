@@ -43,7 +43,7 @@ export default function Dropzone({
         `Drop it like it's hot!`
       ) : multiple === false ? (
         `Drag 'n' drop a file here, or click to select a file.`
-      ) : error !== '' ? (
+      ) : error !== undefined ? (
         <div className={styles.error}>{error}</div>
       ) : (
         `Drag 'n' drop some files here, or click to select files.`
