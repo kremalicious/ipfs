@@ -3,7 +3,7 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/jest/setup.ts'],
   globals: {
     'ts-jest': {
-      tsConfig: 'jest.tsconfig.json'
+      tsconfig: 'jest.tsconfig.json'
     }
   },
   moduleNameMapper: {
@@ -19,5 +19,6 @@ module.exports = {
     '<rootDir>/coverage'
   ],
   collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/@types/**/*'],
-  collectCoverage: true
+  collectCoverage: true,
+  testEnvironment: 'jsdom'
 }

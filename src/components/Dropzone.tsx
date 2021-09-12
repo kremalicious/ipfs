@@ -17,16 +17,13 @@ export default function Dropzone({
   multiple?: boolean
   error?: string
 }): ReactElement {
-  const onDrop = useCallback((acceptedFiles) => handleOnDrop(acceptedFiles), [
-    handleOnDrop
-  ])
+  const onDrop = useCallback(
+    (acceptedFiles) => handleOnDrop(acceptedFiles),
+    [handleOnDrop]
+  )
 
-  const {
-    getRootProps,
-    getInputProps,
-    isDragActive,
-    isDragReject
-  } = useDropzone({ onDrop })
+  const { getRootProps, getInputProps, isDragActive, isDragReject } =
+    useDropzone({ onDrop })
 
   return (
     <div

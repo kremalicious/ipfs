@@ -1,16 +1,13 @@
 import '../styles/global.css'
-import App from 'next/app'
 import React from 'react'
+import { AppProps } from 'next/app'
 import Typekit from '../components/Typekit'
 
-export default class MyApp extends App {
-  render() {
-    const { Component, pageProps } = this.props
-    return (
-      <>
-        <Typekit />
-        <Component {...pageProps} />
-      </>
-    )
-  }
+export default function App({ Component, pageProps }: AppProps): JSX.Element {
+  return (
+    <>
+      <Typekit />
+      <Component {...pageProps} />
+    </>
+  )
 }

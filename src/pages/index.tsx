@@ -7,7 +7,7 @@ import styles from './index.module.css'
 const Add = dynamic(() => import('../components/Add'))
 const Info = dynamic(() => import('../components/Info'))
 
-const Home = () => (
+const Home = (): JSX.Element => (
   <Layout>
     <header className={styles.header}>
       <h1 className={styles.title}>{title}</h1>
