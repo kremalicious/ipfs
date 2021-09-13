@@ -4,6 +4,8 @@
 > [ipfs.kretschmann.io](https://ipfs.kretschmann.io)
 
 [![CI](https://github.com/kremalicious/ipfs/actions/workflows/ci.yml/badge.svg)](https://github.com/kremalicious/ipfs/actions/workflows/ci.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/c43bcf37192f95f3a154/maintainability)](https://codeclimate.com/github/kremalicious/ipfs/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/c43bcf37192f95f3a154/test_coverage)](https://codeclimate.com/github/kremalicious/ipfs/test_coverage)
 
 This repo holds a React app built with [Next.js](https://nextjs.org) serving as the frontpage of [ipfs.kretschmann.io](https://ipfs.kretschmann.io) from where you can add files to IPFS via drag and drop.
 

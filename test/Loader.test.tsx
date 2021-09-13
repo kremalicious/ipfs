@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import Loader from '../components/Loader'
+import Loader from '../src/components/Loader'
 
 describe('Loader', () => {
   it('renders without crashing', async () => {

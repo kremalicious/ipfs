@@ -19,9 +19,3 @@ export async function pingUrl(url: string): Promise<boolean> {
     return false
   }
 }
-
-export function parseHTML(str: string): HTMLCollection {
-  const tmp = document.implementation.createHTMLDocument()
-  tmp.body.innerHTML = str
-  return tmp.body.children
-}

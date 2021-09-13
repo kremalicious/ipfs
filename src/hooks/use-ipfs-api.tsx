@@ -66,7 +66,7 @@ export default function useIpfsApi(): IpfsApiValue {
         setIpfs(ipfs)
         const version = await ipfs.version()
         setVersion(version.version)
-        setIpfsReady(Boolean(ipfs && (await ipfs.id())))
+        setIpfsReady(ipfs?.isOnline())
       } catch (e) {
         setIpfsError(`IPFS connection error: ${(e as Error).message}`)
         setIpfsReady(false)
