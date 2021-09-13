@@ -1,10 +1,6 @@
 import React, { useCallback, ReactElement } from 'react'
-import { useDropzone } from 'react-dropzone'
+import { FileWithPath, useDropzone } from 'react-dropzone'
 import styles from './Dropzone.module.css'
-
-export interface FileDropzone extends File {
-  path: string
-}
 
 export default function Dropzone({
   handleOnDrop,
@@ -12,7 +8,7 @@ export default function Dropzone({
   multiple,
   error
 }: {
-  handleOnDrop(files: FileDropzone[]): void
+  handleOnDrop(files: FileWithPath[]): void
   disabled?: boolean
   multiple?: boolean
   error?: string

@@ -1,10 +1,61 @@
 import React, { useState, ReactElement } from 'react'
 import { ipfsGateway } from '../../site.config'
-import Dropzone, { FileDropzone } from './Dropzone'
+import Dropzone from './Dropzone'
 import styles from './Add.module.css'
 import Loader from './Loader'
 import useIpfsApi from '../hooks/use-ipfs-api'
 import { FileIpfs } from '../@types/ipfs'
+import { FileWithPath } from 'react-dropzone'
+
+function FileLink({
+  file,
+  cidFolder,
+  cid
+}: {
+  file: FileIpfs
+  cidFolder: string
+  cid?: string
+}) {
+  const title = cid ? `ipfs://${cid}` : `ipfs://${cidFolder}/${file.path}`
+  const href = cid
+    ? `${ipfsGateway}/ipfs/${cid}`
+    : `${ipfsGateway}/ipfs/${cidFolder}/${file.path}`
+
+  return cidFolder !== cid ? (
+    <a
+      className={styles.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      href={href}
+    >
+      {title}
+    </a>
+  ) : null
+}
+
+function Files({ files }: { files: FileIpfs[] }) {
+  const cidFolder = files.filter((file) => file.path === '')[0].cid.toString()
+
+  return (
+    <ul className={styles.files}>
+      {files?.map((file) => (
+        <li key={file.path}>
+          <h3 className={styles.title}>
+            {file.path === '' ? 'Folder with all files' : file.path}
+          </h3>
+          <FileLink
+            file={file}
+            cidFolder={cidFolder}
+            cid={file.cid.toString()}
+          />
+          <p>
+            <FileLink file={file} cidFolder={cidFolder} />
+          </p>
+        </li>
+      ))}
+    </ul>
+  )
+}
 
 export default function Add(): ReactElement {
   const { ipfs, isIpfsReady, ipfsError, addFiles } = useIpfsApi()
@@ -13,7 +64,7 @@ export default function Add(): ReactElement {
   const [message] = useState()
   const [error, setError] = useState<string>()
 
-  async function handleOnDrop(acceptedFiles: FileDropzone[]): Promise<void> {
+  async function handleOnDrop(acceptedFiles: FileWithPath[]): Promise<void> {
     if (!acceptedFiles || !ipfs || !isIpfsReady) return
 
     setLoading(true)
@@ -21,7 +72,6 @@ export default function Add(): ReactElement {
 
     try {
       const addedFiles = await addFiles(acceptedFiles)
-      if (!addedFiles) return
       setFiles(addedFiles)
       setLoading(false)
     } catch (error) {
@@ -35,19 +85,7 @@ export default function Add(): ReactElement {
       {loading ? (
         <Loader message={message} />
       ) : files?.length ? (
-        <ul style={{ textAlign: 'left' }}>
-          {files?.map((file: FileIpfs) => (
-            <li key={file.path}>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={`${ipfsGateway}/ipfs/${file.cid.toString()}`}
-              >
-                ipfs://{file.path}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <Files files={files} />
       ) : (
         <Dropzone
           multiple

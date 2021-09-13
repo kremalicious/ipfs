@@ -4,15 +4,15 @@ import type { IPFSHTTPClient } from 'ipfs-http-client'
 import type { CIDVersion } from 'multiformats/cid'
 import { ipfsNodeUri } from '../../site.config'
 import { formatBytes } from '../utils'
-import { FileDropzone } from '../components/Dropzone'
 import type { FileIpfs } from '../@types/ipfs'
+import { FileWithPath } from 'react-dropzone'
 
 export interface IpfsApiValue {
   ipfs: IPFSHTTPClient | undefined
   version: string | undefined
   isIpfsReady: boolean
   ipfsError: string | undefined
-  addFiles: (files: FileDropzone[]) => Promise<FileIpfs[] | undefined>
+  addFiles: (files: FileWithPath[]) => Promise<FileIpfs[] | undefined>
 }
 
 const { hostname, port, protocol } = new URL(ipfsNodeUri)
@@ -30,11 +30,11 @@ export default function useIpfsApi(): IpfsApiValue {
   const [ipfsError, setIpfsError] = useState<string>()
 
   const addFiles = useCallback(
-    async (files: FileDropzone[]): Promise<FileIpfs[] | undefined> => {
+    async (files: FileWithPath[]): Promise<FileIpfs[] | undefined> => {
       if (!ipfs || !files?.length) return
 
       const ipfsFiles = [
-        ...files.map((file: FileDropzone) => {
+        ...files.map((file: FileWithPath) => {
           return { path: file.path, content: file }
         })
       ]
