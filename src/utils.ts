@@ -9,9 +9,12 @@ export function formatBytes(a: number, b: number): string {
   return parseFloat((a / Math.pow(c, f)).toFixed(d)) + ' ' + e[f]
 }
 
-export async function pingUrl(url: string): Promise<boolean> {
+export async function pingUrl(
+  url: string,
+  method?: 'get' | 'post'
+): Promise<boolean> {
   try {
-    const response = await axios(url, { timeout: 5000 })
+    const response = await axios[method || 'get'](url, { timeout: 5000 })
     if (!response || response.status !== 200) return false
     return true
   } catch (error) {

@@ -11,9 +11,9 @@ export default function Status({ type }: { type: string }): ReactElement {
     const url =
       type === 'gateway'
         ? `${ipfsGateway}/ipfs/QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG/readme`
-        : `${ipfsNodeUri}/api/v0/id`
-
-    const ping = await pingUrl(url)
+        : `${ipfsNodeUri}/api/v0/version`
+    const method = type === 'gateway' ? 'get' : 'post'
+    const ping = await pingUrl(url, method)
     setIsLoading(false)
     setIsOnline(ping)
   }, [type])
