@@ -17,7 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.4",
-    "ipfs-http-client": "^52.0.3",
+    "ipfs-http-client": "^54.0.2",
     "next": "^11.1.2",
     "next-seo": "^4.26.0",
     "next-svgr": "^0.0.2",
